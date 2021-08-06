@@ -92,7 +92,12 @@ class _PatientDashboard extends State<PatientDashboard> {
                         width: 200.0,
                         height: 50.0,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) => _buildPopupDialogTransfer(context)
+                            );
+                          },
                           child: const Text('Transfer Records'),
                         ),
                       ),
@@ -126,6 +131,33 @@ class _PatientDashboard extends State<PatientDashboard> {
             ],
         ),
       ),// This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+
+  Widget _buildPopupDialogTransfer(BuildContext context) {
+    return new AlertDialog(
+      title: const Text('Transfer Patient Records'),
+      content: new Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          TextFormField(
+            decoration: InputDecoration(
+                border: UnderlineInputBorder(),
+                labelText: 'Clinician @ sign'
+            )
+          )
+        ],
+      ),
+      actions: <Widget>[
+        new FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          textColor: Theme.of(context).primaryColor,
+          child: const Text('Send'),
+        ),
+      ],
     );
   }
 }
